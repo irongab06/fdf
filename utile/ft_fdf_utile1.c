@@ -117,8 +117,20 @@ void	ft_malloc_init_map(t_map *map)
 			map->map_int[line][column] = ft_atoi(map->map[line][column]);
 			column++;
 		}
-		//printf("map1 : %d", map->map_int[line][200]);
+		//printf("map1 : %d", map->map_int[line][2]);
 		//printf("\n");
 		line++;
 	}
-}	
+}
+void	draw_map(t_map *map)
+{
+	int	line;
+	int	column;
+
+	line = 0;
+	column = 0;
+	mlx_get_screen_size(vars.mlx, &map->width, &map->height);
+	ft_besenham(&img, line, column, 800, column, 0x00FF0000)
+
+
+}

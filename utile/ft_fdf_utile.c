@@ -85,6 +85,6 @@ t_map	ft_split_colomn(char **line)
 		map.map[x] = ft_split(line[x], ' ');
 		x++;
 	}
-	map.map[x] = '\0';
+	map.map[x] = NULL;
 	return (map);
 }

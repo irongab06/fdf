@@ -13,6 +13,8 @@ typedef struct	s_map
 {
 	int		line_count;
 	int		column_count;
+	int		width;
+	int		height;
 	int		**map_int;
 	char	***map;
 }				t_map;
@@ -37,6 +39,7 @@ void	ft_init_map(char *file);
 void	get_line_map(char **str_map, char *file, int size);
 void	ft_besenham(t_data *img, int x1, int y1, int x2, int y2, int color);
 void	ft_malloc_init_map(t_map *map);
+void	draw_map(t_map *map);
 
 //--------------------------------------------------------------
 
