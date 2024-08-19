@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "libft/libft.h"
 #include "get_next_line/get_next_line.h"
+#include <math.h>
 
 typedef struct	s_map
 {
@@ -16,6 +17,9 @@ typedef struct	s_map
 	int		width;
 	int		height;
 	int		**map_int;
+	float	x_iso;
+	float	y_iso;
+	float	scale;
 	char	***map;
 }				t_map;
 
@@ -35,11 +39,12 @@ typedef struct	s_vars
 }				t_vars;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	ft_init_map(char *file);
+void	ft_init_map(char *file, t_data *img);
 void	get_line_map(char **str_map, char *file, int size);
 void	ft_besenham(t_data *img, int x1, int y1, int x2, int y2, int color);
 void	ft_malloc_init_map(t_map *map);
-void	draw_map(t_map *map);
+void	draw_map(t_map *map, t_data *img);
+void	project_iso(int x, int y, t_map *map, int z);
 
 //--------------------------------------------------------------
 

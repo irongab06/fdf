@@ -2,7 +2,8 @@ NAME = fdf
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I/usr/include -Iminilibx-linux -O3
 SRC = src/main.c src/ft_mlx.c utile/ft_fdf_utile.c get_next_line/get_next_line.c\
-get_next_line/get_next_line_utils.c src/ft_init_map.c utile/ft_fdf_utile1.c
+get_next_line/get_next_line_utils.c src/ft_init_map.c utile/ft_fdf_utile1.c\
+utile/ft_fdf_utile2.c
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MINILIBX_DIR = minilibx-linux 

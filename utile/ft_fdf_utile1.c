@@ -122,15 +122,34 @@ void	ft_malloc_init_map(t_map *map)
 		line++;
 	}
 }
-void	draw_map(t_map *map)
+void	draw_map(t_map *map, t_data *img)
 {
 	int	line;
 	int	column;
+	float	temp_column;
+	float	temp_line;
 
+	map->scale = 30.0f;
 	line = 0;
-	column = 0;
-	mlx_get_screen_size(vars.mlx, &map->width, &map->height);
-	ft_besenham(&img, line, column, 800, column, 0x00FF0000)
-
-
+	while (line < map->line_count)
+	{
+		column = 0;
+		while (column < map->column_count)
+		{
+			project_iso(line, column, map, map->map_int[line][column]);
+			if (column > 0)
+				ft_besenham(img, temp_line, temp_column, map->x_iso, map->y_iso, 0x00FF0000);
+			temp_column = map->y_iso;
+			temp_line = map->x_iso;
+			if(line > 0)
+			{
+				project_iso(line - 1, column, map, map->map_int[line - 1][column]);
+                ft_besenham(img, map->x_iso, map->y_iso, temp_line, temp_column, 0x00FF0000);
+                project_iso(line, column, map, map->map_int[line][column]);
+			}
+			column++;
+		}
+		line++;
+	}
+	//mlx_get_screen_size(vars.mlx, &map->width, &map->height);
 }

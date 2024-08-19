@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-void	ft_init_map(char *file)
+void	ft_init_map(char *file, t_data *img)
 {
 	int		size;
 	char	*str_map;
@@ -18,7 +18,7 @@ void	ft_init_map(char *file)
 	map = ft_split_colomn(line);
 	map.column_count = ft_count_column(map.map);
 	ft_malloc_init_map(&map);
-	draw_map(&map);
+	draw_map(&map, img);
 	free(map.map);
 	free(str_map);
 	free(line);

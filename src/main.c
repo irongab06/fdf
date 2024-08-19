@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 		// ft_besenham(&img, 2185, 700, 2185, 1330, 0x00FF0000);
 		// ft_besenham(&img, 2280, 700, 2280, 1330, 0x00FF0000);
 		// ft_besenham(&img, 2280, 700, 0, 0, 0x00FF0000);
-		ft_besenham(&img, 0, 0, 1920, 1010, 0x00FF0000); // (0, 0, 0) à (1, 0, 0)
+		//ft_besenham(&img, 0, 0, 1920, 1010, 0x00FF0000); // (0, 0, 0) à (1, 0, 0)
 		//ft_besenham(&img, 1230, 750, 1320, 800, 0x00FF0000); // (1, 0, 0) à (2, 0, 0)
 		// ft_besenham(&img, 1050, 750, 1140, 800, 0x00FF0000); // (0, 1, 0) à (1, 1, 0)
 		// ft_besenham(&img, 1140, 800, 1230, 850, 0x00FF0000); // (1, 1, 0) à (2, 1, 0)
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 		// ft_besenham(&img, 1140, 800, 1050, 850, 0x00FF0000); // (1, 1, 0) à (1, 2, 0)
 		// ft_besenham(&img, 1320, 800, 1230, 850, 0x00FF0000); // (2, 0, 0) à (2, 1, 0)
 		// ft_besenham(&img, 1230, 850, 1140, 900, 0x00FF0000); // (2, 1, 0) à (2, 2, 0)
-		ft_init_map(argv[1]);
+		ft_init_map(argv[1], &img);
 		mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 		mlx_hook(vars.win, 2, 1L<<0, escape_key, &vars);
 		mlx_hook(vars.win, 33, 0L, close_window, &vars);
