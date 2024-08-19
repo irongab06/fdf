@@ -129,7 +129,7 @@ void	draw_map(t_map *map, t_data *img)
 	float	temp_column;
 	float	temp_line;
 
-	map->scale = 30.0f;
+	map->scale = 40.0f;
 	line = 0;
 	while (line < map->line_count)
 	{
