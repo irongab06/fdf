@@ -105,7 +105,7 @@ void	ft_malloc_init_map(t_map *map)
 	while (line < map->line_count)
 	{
 		map->map_int[line] = malloc(sizeof(int) * map->column_count);
-		ft_bzero(map->map_int[line], (size_t)map->column_count);
+		ft_bzero(map->map_int[line], sizeof(int) * map->column_count);
 		line++;
 	}
 	line = 0;
@@ -114,11 +114,12 @@ void	ft_malloc_init_map(t_map *map)
 		column = 0;
 		while (column < map->column_count)
 		{
-			map->map_int[line][column] = ft_atoi(map->map[line][column]);
+			if (map->map[line] != NULL && map->map[line][column] != NULL)
+				map->map_int[line][column] = ft_atoi(map->map[line][column]);
+			else
+				map->map_int[line][column] = 0;
 			column++;
 		}
-		//printf("map1 : %d", map->map_int[line][2]);
-		//printf("\n");
 		line++;
 	}
 }
@@ -129,7 +130,7 @@ void	draw_map(t_map *map, t_data *img)
 	float	temp_column;
 	float	temp_line;
 
-	map->scale = 40.0f;
+	map->scale = 10.0f;
 	line = 0;
 	while (line < map->line_count)
 	{
