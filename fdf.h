@@ -45,6 +45,9 @@ void	ft_besenham(t_data *img, int x1, int y1, int x2, int y2, int color);
 void	ft_malloc_init_map(t_map *map);
 void	draw_map(t_map *map, t_data *img);
 void	project_iso(int x, int y, t_map *map, int z);
+void	ft_free(t_map *map);
+void	ft_free_3d(char ***str);
+void	ft_free_str(char **str);
 
 //--------------------------------------------------------------
 

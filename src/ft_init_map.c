@@ -6,8 +6,6 @@ void	ft_init_map(char *file, t_data *img)
 	char	*str_map;
 	char	**line;
 	t_map	map;
-	//  int	x;
-	//  int	y;
 
 	str_map = NULL;
 	size = ft_size_map(file);
@@ -19,7 +17,8 @@ void	ft_init_map(char *file, t_data *img)
 	map.column_count = ft_count_column(map.map);
 	ft_malloc_init_map(&map);
 	draw_map(&map, img);
-	free(map.map);
+	ft_free_3d(map.map);
+	ft_free(&map);
 	free(str_map);
-	free(line);
+	ft_free_str(line);
 }
