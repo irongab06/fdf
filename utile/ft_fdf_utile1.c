@@ -19,49 +19,80 @@ void	ft_besenham(t_data *img, int x1, int y1, int x2, int y2, int color)
 	//int x1 = 0, y1 = 8;
 	//int x2 = 8, y2 = 3;
 
-	int ey = abs(y2 -y1);
-	int ex = abs(x2 - x1);
-	int dx = 2 * ex;
-	int dy = 2 * ey;
-	int Dx = ex;
-	int Dy = ey;
+	// int ey = abs(y2 -y1);
+	// int ex = abs(x2 - x1);
+	// int dx = 2 * ex;
+	// int dy = 2 * ey;
+	// int Dx = ex;
+	// int Dy = ey;
 
-	int i = 0;
-	int Xincr = 1;
-	int Yincr = 1;
+	// int i = 0;
+	// int Xincr = 1;
+	// int Yincr = 1;
 
-	if (x1 > x2)
-		Xincr = -1;
-	if (y1 > y2)
-		Yincr = -1;
-	if (Dx > Dy)
+	// if (x1 > x2)
+	// 	Xincr = -1;
+	// if (y1 > y2)
+	// 	Yincr = -1;
+	// if (Dx > Dy)
+	// {
+	// 	while (i <= Dx)
+	// 	{
+	// 		my_mlx_pixel_put(img, x1, y1, color);
+	// 		i++;
+	// 		x1 += Xincr;
+	// 		ex -= dy;
+	// 		if (ex <0)
+	// 		{
+	// 			y1 += Yincr;
+	// 			ex += dx;		
+	// 		}
+	// 	}
+	// }
+	// if (Dy > Dx)
+	// {
+	// 	while (i <= Dy)
+	// 	{
+	// 		my_mlx_pixel_put(img, x1, y1, color);
+	// 		i++;
+	// 		y1 += Yincr;
+	// 		ey -= dx;
+	// 		if (ey <0)
+	// 		{
+	// 			x1 += Xincr;
+	// 			ey += dy;		
+	// 		}
+	// 	}
+	// }
+//---------------------------------------------------------------	
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+
+	dx = abs(x2 - x1);
+	dy = abs(y2 - y1);
+	sx = (x1 < x2) ? 1 : -1;
+	sy = (y1 < y2) ? 1 : -1;
+	err = dx - dy;
+	while (1)
 	{
-		while (i <= Dx)
-		{
+		if (x1 < img->width && y1 < img->height && x1 >= 0 && y1 >= 0)
 			my_mlx_pixel_put(img, x1, y1, color);
-			i++;
-			x1 += Xincr;
-			ex -= dy;
-			if (ex <0)
-			{
-				y1 += Yincr;
-				ex += dx;		
-			}
+		if (x1 == x2 && y1 == y2)
+			break ;
+		e2 = 2 * err;
+		if (e2 > -dy)
+		{
+			err -= dy;
+			x1 += sx;
 		}
-	}
-	if (Dy > Dx)
-	{
-		while (i <= Dy)
+		if (e2 < dx)
 		{
-			my_mlx_pixel_put(img, x1, y1, color);
-			i++;
-			y1 += Yincr;
-			ey -= dx;
-			if (ey <0)
-			{
-				x1 += Xincr;
-				ey += dy;		
-			}
+			err += dx;
+			y1 += sy;
 		}
 	}
 }
@@ -101,6 +132,7 @@ void	ft_malloc_init_map(t_map *map)
 	column = 0;
 	line = 0;
 	printf("map->column %i\n", map->column_count);
+	printf("map->line %i\n", map->line_count);
 	map->map_int = malloc(sizeof(int*) * map->line_count);
 	while (line < map->line_count)
 	{
@@ -130,8 +162,10 @@ void	draw_map(t_map *map, t_data *img)
 	float	temp_column;
 	float	temp_line;
 
-	map->scale = 20.0f;
+	//map->scale = 8.0f;
 	line = 0;
+	ft_scale(map, img);
+	ft_center_map(map->line_count, map->column_count, map, img);
 	while (line < map->line_count)
 	{
 		column = 0;

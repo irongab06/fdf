@@ -20,6 +20,8 @@ typedef struct	s_map
 	float	x_iso;
 	float	y_iso;
 	float	scale;
+	float	offset_x;
+	float	offset_y;
 	char	***map;
 }				t_map;
 
@@ -30,6 +32,8 @@ typedef struct	s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }				t_data;
 
 typedef struct	s_vars 
@@ -48,12 +52,14 @@ void	project_iso(int x, int y, t_map *map, int z);
 void	ft_free(t_map *map);
 void	ft_free_3d(char ***str);
 void	ft_free_str(char **str);
+void	ft_scale(t_map *map, t_data *img);
+void	ft_center_map(int x, int y, t_map *map, t_data *img);
 
 //--------------------------------------------------------------
 
 int	close_window(t_vars *vars);
 int	escape_key(int keycode, t_vars *vars);
-int		ft_size_map(char *file);
+int	ft_size_map(char *file);
 int	ft_count_line(char **line);
 int	ft_count_column(char ***map);
 
