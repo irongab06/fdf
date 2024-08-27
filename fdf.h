@@ -71,6 +71,7 @@ void	ft_scale(t_map *map);
 void	ft_center_map(int x, int y, t_map *map);
 void	ft_height(t_map *map);
 void	ft_reset_map(t_map *map);
+void	config_start_draw(t_map *map);
 
 //--------------------------------------------------------------
 

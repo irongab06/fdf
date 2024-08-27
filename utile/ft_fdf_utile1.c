@@ -109,13 +109,7 @@ void	draw_map(t_map *map, int inter)
 
 	line = 0;
 	if (inter == 0)
-	{
-		ft_scale(map);
-		ft_center_map(map->line_count, map->column_count, map);
-		ft_height(map);
-		map->rotate = 6;
-		map->new_projection = 6;
-	}	
+		config_start_draw(map);
 	while (line < map->line_count)
 	{
 		column = 0;
@@ -123,9 +117,7 @@ void	draw_map(t_map *map, int inter)
 		{
 			project_iso(line, column, map, map->map_int[line][column]);
 			if (column > 0)
-			{
 				ft_besenham(map, temp_line, temp_column, map->x_iso, map->y_iso, 0x00FF0000);
-			}	
 			temp_column = map->y_iso;
 			temp_line = map->x_iso;
 			if (line > 0)

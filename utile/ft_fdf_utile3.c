@@ -18,8 +18,6 @@ void	ft_center_map(int x, int y, t_map *map)
 
 	map->offset_x = (map->width / 2) - map->x_iso;
 	map->offset_y = (map->height / 2) - map->y_iso;
-	//------------------------------------------------------
-
 }
 
 void	ft_height(t_map *map)
@@ -44,7 +42,6 @@ void	ft_height(t_map *map)
 		}
 		line++;
 	}
-	printf("z_max %i\n", z_max);
 	line = 0;
 	while(line < map->line_count)
 	{
@@ -56,7 +53,6 @@ void	ft_height(t_map *map)
 				map->y_iso = ((line - column) * SIN30 - (map->map_int[line][column] / map->divider)) * map->scale + map->offset_y;
 				while (map->y_iso < 0)
 				{
-					printf("map iso %f\n", map->y_iso);	
 					if (z_max < 20)
 						map->divider = 2;
 					else if (z_max < 100)
@@ -96,7 +92,11 @@ void	ft_reset_map(t_map *map)
 	mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
 }
 
-void	config_map(t_map *map)
+void	config_start_draw(t_map *map)
 {
-	
+			ft_scale(map);
+		ft_center_map(map->line_count, map->column_count, map);
+		ft_height(map);
+		map->rotate = 6;
+		map->new_projection = 6;
 }

@@ -59,13 +59,8 @@ int	mouse_scroll(int scroll, int x, int y, t_map *map)
 	(void)y;
 	(void)map;
 
-	printf("ca marche ");
-
 	if (scroll == 4)
-	{
-		printf("scroll\n");
 		map->scale += 0.30f;
-	}	
 	if (scroll == 5)
 		map->scale -= 0.30f;
 	ft_reset_map(map);
