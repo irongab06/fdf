@@ -1,41 +1,26 @@
 #include "../fdf.h"
 
-int	mouse_click(int button, int x, int y, void *param)
-{
-	(void)param; // On n'utilise pas le paramètre ici, donc on le cast pour éviter les warnings.
-	if (button == 1) // Le bouton gauche de la souris est souvent représenté par le numéro 1
-	{
-		printf("Clic détecté aux coordonnées : x = %d, y = %d\n", x, y);
-	}
-	return (0);
-}
-
-
 int	main(int argc, char **argv)
 {	
-	t_vars	vars;
-	t_data	img;
-	int		width;
-	int		height;
+	t_map	map;
 
 	if (argc == 2)
 	{
-		vars.mlx = mlx_init();
-		mlx_get_screen_size(vars.mlx, &width, &height);
-		vars.win = mlx_new_window(vars.mlx, width, height, "fdf!!!!");
-		img.img = mlx_new_image(vars.mlx, width, height);
-		printf("taille ecran %i\n", width);
-		printf("taille ecran %i\n", height);
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-									&img.endian);
-		img.height = height;
-		img.width = width;
-		ft_init_map(argv[1], &img);
-		mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-		mlx_mouse_hook(vars.win, mouse_click, NULL);
-		mlx_hook(vars.win, 2, 1L<<0, escape_key, &vars);
-		mlx_hook(vars.win, 33, 0L, close_window, &vars);
-		mlx_loop(vars.mlx);
+		map.mlx = mlx_init();
+		mlx_get_screen_size(map.mlx, &map.width, &map.height);
+		map.win = mlx_new_window(map.mlx, map.width, map.height, "fdf!!!!");//
+		map.img = mlx_new_image(map.mlx, map.width, map.height);//
+		map.addr = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length,
+									&map.endian);
+		ft_init_map(argv[1], &map);
+		mlx_put_image_to_window(map.mlx, map.win, map.img, 0, 0);
+		mlx_key_hook(map.win, key_hook, &map);
+		mlx_hook(map.win, 4, 4, mouse_scroll, &map);
+		mlx_hook(map.win, 2, 1L<<0, escape_key, &map);
+		mlx_hook(map.win, 33, 0L, close_window, &map);
+		mlx_loop(map.mlx);
+		ft_free_3d(map.map);
+		ft_free(&map); //free(str_map); ft_free_str(line);
 	}
 	return (0);
 }
