@@ -2,20 +2,23 @@
 
 int	ft_size_map(char *file)
 {
-	int	fd;
-	int	read_open;
-	int	size;
-	char buffer[1];
+	int		fd;
+	int		read_open;
+	int		size;
+	char	buffer[1];
 
 	size = 0;
 	fd = open(file, O_RDONLY);
-	
+	read_open = read(fd, buffer, 1);
 	if (fd < 0)
 		return (0);
-		
-	while ((read_open = read(fd, buffer, 1))> 0)
+	read_open = read(fd, buffer, 1);
+	while (read_open > 0)
+	{
 		size++;
-	
+		read_open = read(fd, buffer, 1);
+	}
+	printf("read_open %i\n", size);
 	if (read_open < 0)
 	{
 		ft_putstr_fd("ERROR NO MAP !!!!!!\n", 0);
@@ -65,10 +68,10 @@ void	get_line_map(char **str_map, char *file, int size)
 			break ;
 		temp = ft_strjoin(*str_map, line);
 		if (temp == NULL)
-        {
-            free(line);
-            break;
-        }
+		{
+			free(line);
+			break ;
+		}
 		free(line);
 		free(*str_map);
 		*str_map = temp;
@@ -82,7 +85,7 @@ void	ft_split_colomn(char **line, t_map *map)
 
 	x = 0;
 	map->line_count = ft_count_line(line);
-	map->map = malloc(sizeof(char**) * (map->line_count + 1));
+	map->map = malloc(sizeof(char **) * (map->line_count + 1));
 	while (line[x])
 	{
 		map->map[x] = ft_split(line[x], ' ');

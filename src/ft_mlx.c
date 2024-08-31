@@ -5,7 +5,7 @@ void	my_mlx_pixel_put(t_map *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	close_window(t_map *map)
@@ -36,8 +36,8 @@ int	key_hook(int keycode, t_map *map)
 	if (keycode == 0xff53)
 		map->offset_x += 20.00f;
 	if (keycode == 0xff56)
-		map->divider += 0.10f;
-	if (keycode == 0xff55)
+		map->divider += 0.10f;	
+	if (keycode == 0xff55 && map->divider >= 0.10f)
 		map->divider -= 0.10f;
 	if (keycode == 0x2d)
 		map->rotate += 0.20f;
@@ -58,11 +58,10 @@ int	mouse_scroll(int scroll, int x, int y, t_map *map)
 	(void)x;
 	(void)y;
 	(void)map;
-
 	if (scroll == 4)
-		map->scale += 0.30f;
-	if (scroll == 5)
-		map->scale -= 0.30f;
+		map->scale += 0.50f;
+	if (scroll == 5 && map->scale >= 2.00f)
+		map->scale -= 0.50f;
 	ft_reset_map(map);
 	return (0);
 }

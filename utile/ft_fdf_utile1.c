@@ -14,6 +14,7 @@ int	ft_count_line(char **line)
 	}
 	return (i);
 }
+
 void	ft_besenham(t_map *map, int x1, int y1, int x2, int y2, int color)
 {
 	int	dx;

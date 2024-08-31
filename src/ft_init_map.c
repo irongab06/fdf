@@ -18,7 +18,6 @@ void	ft_init_map(char *file, t_map *map)
 	ft_printf();
 	if (size != 0)
 	{
-		
 		ft_bzero(str_map, (size_t)size);
 		get_line_map(&str_map, file, size);
 		line = ft_split(str_map, '\n');

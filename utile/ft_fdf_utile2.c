@@ -2,21 +2,25 @@
 
 void	project_iso(int x, int y, t_map *map, int z)
 {
-	float cos_angle;
-    float sin_angle;
+	float	add;
+	float	cos_angle;
+	float	sin_angle;
 
-    cos_angle = cos(map->rotate);
-    sin_angle = sin(map->rotate);
+	add = 0;
 
-    float x_rot = x * cos_angle - y * sin_angle;
-    float y_rot = x * sin_angle + y * cos_angle;
+	cos_angle = cos(map->rotate);
+	sin_angle = sin(map->rotate);
 
-    float COS30 = cos(M_PI / 6);
-    float SIN30 = sin(M_PI / map->new_projection);
+	float	x_rot = x * cos_angle - y * sin_angle;
+	float	y_rot = x * sin_angle + y * cos_angle;
 
-    map->x_iso = (x_rot + y_rot) * COS30 * map->scale + map->offset_x;
-    map->y_iso = ((x_rot - y_rot) * SIN30 - (z / map->divider)) * map->scale + map->offset_y;
+	float	COS30 = cos(M_PI / 6);
+	float	SIN30 = sin(M_PI / map->new_projection);
 
+	map->x_iso = (x_rot + y_rot) * COS30 * map->scale + map->offset_x;
+	add = (x_rot - y_rot) * SIN30;
+	map->y_iso = (add - (z / map->divider)) * map->scale + map->offset_y;
+	//(x_rot - y_rot) * SIN30;
 }
 
 void	ft_free(t_map *map)
