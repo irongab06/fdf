@@ -1,11 +1,5 @@
 #include "../fdf.h"
 
-void	ft_printf(void)
-{
-	printf("deplacement -> fleches\n");
-	printf("zoom -> scroll-mouse\n");
-}
-
 void	ft_init_map(char *file, t_map *map)
 {
 	int		size;
@@ -15,7 +9,6 @@ void	ft_init_map(char *file, t_map *map)
 	str_map = NULL;
 	size = ft_size_map(file);
 	str_map = ft_malloc(size);
-	ft_printf();
 	if (size != 0)
 	{
 		ft_bzero(str_map, (size_t)size);

@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-void	project_iso(int x, int y, t_map *map, int z)
+void	proj_iso(int x, int y, t_map *map, int z)
 {
 	float	add;
 	float	cos_angle;

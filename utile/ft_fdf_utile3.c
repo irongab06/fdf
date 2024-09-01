@@ -69,19 +69,6 @@ void	ft_height(t_map *map)
 	}
 }
 
-int	ft_color(t_map *map, int x, int y)
-{
-	int	value;
-
-	value = map->map_int[x][y];
-	if (value > 0)
-		return (0x00FF00FF);
-	else
-		return (0x00FF0000);
-	return (0);
-
-}
-
 void	ft_reset_map(t_map *map)
 {
 	mlx_destroy_image(map->mlx, map->img);
@@ -99,4 +86,14 @@ void	config_start_draw(t_map *map)
 		ft_height(map);
 		map->rotate = 6;
 		map->new_projection = 6;
+		map->color = 0x00FF0000;
+		map->index_color = 0;
+}
+
+void	ft_switch_1(t_map *map, t_algo *algo)
+{
+	algo->x1 = map->x_iso;
+	algo->y1 = map->y_iso;
+	algo->x2 = algo->temp_line;
+	algo->y2 = algo->temp_column;
 }

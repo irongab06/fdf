@@ -15,53 +15,42 @@ int	ft_count_line(char **line)
 	return (i);
 }
 
-void	ft_besenham(t_map *map, int x1, int y1, int x2, int y2, int color)
+void	ft_besenham_1(t_map *map, t_algo *algo)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-
-	dx = abs(x2 - x1);
-	dy = abs(y2 - y1);
-	sx = (x1 < x2) ? 1 : -1;
-	sy = (y1 < y2) ? 1 : -1;
-	err = dx - dy;
+	ft_init_value(algo);
 	while (1)
 	{
-		if (x1 < map->width && y1 < map->height && x1 >= 0 && y1 >= 0)
-			my_mlx_pixel_put(map, x1, y1, color);
-		if (x1 == x2 && y1 == y2)
+		if (algo->x1 < map->width && algo->y1 < map->height
+			&& algo->x1 >= 0 && algo->y1 >= 0)
+			my_mlx_pixel_put(map, algo->x1, algo->y1, map->color);
+		if (algo->x1 == algo->x2 && algo->y1 == algo->y2)
 			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
+		algo->e2 = 2 * algo->err;
+		if (algo->e2 > -algo->dy)
 		{
-			err -= dy;
-			x1 += sx;
+			algo->err -= algo->dy;
+			algo->x1 += algo->sx;
 		}
-		if (e2 < dx)
+		if (algo->e2 < algo->dx)
 		{
-			err += dx;
-			y1 += sy;
+			algo->err += algo->dx;
+			algo->y1 += algo->sy;
 		}
 	}
- }
+}
 
- int	ft_count_column(char ***map)
- {
+int	ft_count_column(char ***map)
+{
 	int	line;
 	int	column;
 	int	max_column;
 
 	line = 0;
 	max_column = 0;
-	while(map[line])
+	while (map[line])
 	{
-	
 		column = 0;
-		while(map[line][column])
+		while (map[line][column])
 		{
 			if (column >= max_column)
 				max_column++;
@@ -69,8 +58,8 @@ void	ft_besenham(t_map *map, int x1, int y1, int x2, int y2, int color)
 		}
 		line++;
 	}
-	return(max_column);
- }
+	return (max_column);
+}
 
 void	ft_malloc_init_map(t_map *map)
 {
@@ -79,11 +68,10 @@ void	ft_malloc_init_map(t_map *map)
 
 	column = 0;
 	line = 0;
-	map->map_int = malloc(sizeof(int*) * map->line_count);
+	map->map_int = malloc(sizeof(int *) * map->line_count);
 	while (line < map->line_count)
 	{
-		map->map_int[line] = malloc(sizeof(int) * map->column_count);
-		ft_bzero(map->map_int[line], sizeof(int) * map->column_count);
+		ft_malloc_1(map, line);
 		line++;
 	}
 	line = 0;
@@ -101,12 +89,12 @@ void	ft_malloc_init_map(t_map *map)
 		line++;
 	}
 }
+
 void	draw_map(t_map *map, int inter)
 {
-	int	line;
-	int	column;
-	float	temp_column;
-	float	temp_line;
+	int		line;
+	int		column;
+	t_algo	algo;
 
 	line = 0;
 	if (inter == 0)
@@ -116,19 +104,15 @@ void	draw_map(t_map *map, int inter)
 		column = 0;
 		while (column < map->column_count)
 		{
-			project_iso(line, column, map, map->map_int[line][column]);
+			proj_iso(line, column, map, map->map_int[line][column]);
 			if (column > 0)
-				ft_besenham(map, temp_line, temp_column, map->x_iso, map->y_iso, 0x00FF0000);
-			temp_column = map->y_iso;
-			temp_line = map->x_iso;
+				ft_draw_column(map, &algo);
+			algo.temp_column = map->y_iso;
+			algo.temp_line = map->x_iso;
 			if (line > 0)
-			{
-				project_iso(line - 1, column, map, map->map_int[line - 1][column]);
-                ft_besenham(map, map->x_iso, map->y_iso, temp_line, temp_column, 0x00FF0000);
-                project_iso(line, column, map, map->map_int[line][column]);
-			}
+				ft_draw_line(map, &algo, line, column);
 			column++;
 		}
 		line++;
 	}
-}	
+}

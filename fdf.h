@@ -27,7 +27,8 @@ typedef struct	s_map
 	int		line_length;
 	int		endian;
 	int		new_projection;
-	float	color;
+	int		color;
+	int		index_color;
 	float	divider;
 	float	x_iso;
 	float	y_iso;
@@ -38,32 +39,30 @@ typedef struct	s_map
 	char	*addr;
 }				t_map;
 
-typedef struct	s_data 
+typedef struct	s_algo 
 {
-	//void	*img;
-	//char	*addr;
-	//int		bits_per_pixel;
-	//int		line_length;
-	//int		endian;
-	int		width;
-	int		height;
-}				t_data;
-
-typedef struct	s_vars 
-{
-	void	*mlx;
-	void	*win;
-}				t_vars;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+	int	x1;
+	int	x2;
+	int	y1;
+	int	y2;
+	float	temp_column;
+	float	temp_line;
+}				t_algo;
 
 //---------------------------------------------------------------
 
 void	my_mlx_pixel_put(t_map *data, int x, int y, int color);
 void	ft_init_map(char *file, t_map *map);
 void	get_line_map(char **str_map, char *file, int size);
-void	ft_besenham(t_map *map, int x1, int y1, int x2, int y2, int color);
 void	ft_malloc_init_map(t_map *map);
 void	draw_map(t_map *map, int inter);
-void	project_iso(int x, int y, t_map *map, int z);
+void	proj_iso(int x, int y, t_map *map, int z);
 void	ft_free(t_map *map);
 void	ft_free_3d(char ***str);
 void	ft_free_str(char **str);
@@ -72,6 +71,18 @@ void	ft_center_map(int x, int y, t_map *map);
 void	ft_height(t_map *map);
 void	ft_reset_map(t_map *map);
 void	config_start_draw(t_map *map);
+void	ft_movement(int keycode, t_map *map);
+void	ft_up_down(int keycode, t_map *map);
+void	ft_rotate(int keycode, t_map *map);
+void	ft_projection(int keycode, t_map *map);
+void	ft_color(int keycode, t_map *map);
+void	ft_besenham_1(t_map *map, t_algo *algo);
+void	ft_switch(t_map *map, t_algo *algo);
+void	ft_switch_1(t_map *map, t_algo *algo);
+void	ft_init_value(t_algo *algo);
+void	ft_malloc_1(t_map *map, int line);
+void	ft_draw_line(t_map *map, t_algo *algo, int line, int column);
+void	ft_draw_column(t_map *map, t_algo *algo);
 
 //--------------------------------------------------------------
 

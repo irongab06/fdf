@@ -27,26 +27,11 @@ int	escape_key(int keycode, t_map *map)
 
 int	key_hook(int keycode, t_map *map)
 {
-	if (keycode == 0xff51)
-		map->offset_x -= 20.00f;
-	if (keycode == 0xff52)
-		map->offset_y -= 20.00f;
-	if (keycode == 0xff54)
-		map->offset_y += 20.00f;
-	if (keycode == 0xff53)
-		map->offset_x += 20.00f;
-	if (keycode == 0xff56)
-		map->divider += 0.10f;	
-	if (keycode == 0xff55 && map->divider >= 0.10f)
-		map->divider -= 0.10f;
-	if (keycode == 0x2d)
-		map->rotate += 0.20f;
-	if (keycode == 0x3d)
-		map->rotate -= 0.20f;
-	if (keycode == 0x32)
-		map->new_projection = 1;
-	if (keycode == 0x31)
-		map->new_projection = 6;
+	ft_movement(keycode, map);
+	ft_up_down(keycode, map);
+	ft_rotate(keycode, map);
+	ft_projection(keycode, map);
+	ft_color(keycode, map);
 	if (keycode == 0xff0d)
 		draw_map(map, 0);
 	ft_reset_map(map);
