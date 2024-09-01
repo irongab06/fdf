@@ -96,6 +96,7 @@ void	draw_map(t_map *map, int inter)
 	int		column;
 	t_algo	algo;
 
+	ft_init_algo(&algo);
 	line = 0;
 	if (inter == 0)
 		config_start_draw(map);

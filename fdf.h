@@ -96,7 +96,12 @@ void	ft_malloc_1(t_map *map, int line);
 void	ft_draw_line(t_map *map, t_algo *algo, int line, int column);
 void	ft_draw_column(t_map *map, t_algo *algo);
 void	ft_height_2(t_map *map, int line, int column, float SIN30);
+void	ft_init_struct(t_map *map);
 void	ft_split_colomn(char **line, t_map *map);
+void	ft_init_struct_int(t_map *map);
+void	ft_init_float(t_map *map);
+void	ft_init_pointers(t_map *map);
+void	ft_init_algo(t_algo *algo);
 
 //--------------------------------------------------------------
 

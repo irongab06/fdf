@@ -4,6 +4,7 @@ int	main(int argc, char **argv)
 {
 	t_map	map;
 
+	ft_init_struct(&map);
 	if (argc == 2)
 	{
 		map.size = ft_size_map(argv[1]);
