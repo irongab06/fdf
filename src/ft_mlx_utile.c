@@ -2,7 +2,7 @@
 
 void	ft_movement(int keycode, t_map *map)
 {
-		if (keycode == 0xff51)
+	if (keycode == 0xff51)
 		map->offset_x -= 20.00f;
 	if (keycode == 0xff52)
 		map->offset_y -= 20.00f;
@@ -15,7 +15,7 @@ void	ft_movement(int keycode, t_map *map)
 void	ft_up_down(int keycode, t_map *map)
 {
 	if (keycode == 0xff56)
-		map->divider += 0.10f;	
+		map->divider += 0.10f;
 	if (keycode == 0xff55 && map->divider >= 0.10f)
 		map->divider -= 0.10f;
 }
@@ -37,15 +37,15 @@ void	ft_projection(int keycode, t_map *map)
 }
 
 void	ft_color(int keycode, t_map *map)
-{	
+{
 	if (keycode == 0x5b && map->index_color < 5)
 		map->index_color++;
 	if (keycode == 0x5d && map->index_color > 0)
 		map->index_color--;
 	if (map->index_color == 0)
- 		map->color = 0x00FF0000;
- 	if (map->index_color == 1)
- 		map->color = 0x0000FF00;
+		map->color = 0x00FF0000;
+	if (map->index_color == 1)
+		map->color = 0x0000FF00;
 	if (map->index_color == 2)
 		map->color = 0x000000FF;
 	if (map->index_color == 3)
@@ -53,6 +53,5 @@ void	ft_color(int keycode, t_map *map)
 	if (map->index_color == 4)
 		map->color = 0x00FFFF00;
 	if (map->index_color == 5)
-		map->color = 0x00FF69B4;
-	
+		map->color = 0x00FF1CAE;
 }

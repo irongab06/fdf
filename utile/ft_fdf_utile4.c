@@ -17,13 +17,13 @@ void	ft_init_value(t_algo *algo)
 
 void	ft_malloc_1(t_map *map, int line)
 {
-		map->map_int[line] = malloc(sizeof(int) * map->column_count);
-		if (map->map_int[line] == NULL)
-		{
-			ft_putstr_fd("Malloc error\n", 2);
-			exit (1);
-		}	
-		ft_bzero(map->map_int[line], sizeof(int) * map->column_count);
+	map->map_int[line] = malloc(sizeof(int) * map->column_count);
+	if (map->map_int[line] == NULL)
+	{
+		ft_putstr_fd("Malloc error\n", 2);
+		exit (1);
+	}
+	ft_bzero(map->map_int[line], sizeof(int) * map->column_count);
 }
 
 void	ft_draw_line(t_map *map, t_algo *algo, int line, int column)

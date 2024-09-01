@@ -1,17 +1,19 @@
 #ifndef FDF_H
 # define FDF_H
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
-#include <math.h>
+# include <math.h>
+# include <mlx.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include "libft/libft.h"
+# include "get_next_line/get_next_line.h"
+
+# define M_PI 3.14159265358979323846
 
 typedef struct	s_map
-{	
+{
 	void	*img;
 	void	*mlx;
 	void	*win;
@@ -28,6 +30,7 @@ typedef struct	s_map
 	int		endian;
 	int		new_projection;
 	int		color;
+	int		z_max;
 	int		index_color;
 	float	divider;
 	float	x_iso;
@@ -35,22 +38,26 @@ typedef struct	s_map
 	float	scale;
 	float	offset_x;
 	float	offset_y;
+	float	x_rot;
+	float	y_rot;
+	float	COS;
+	float	SIN;
 	char	***map;
 	char	*addr;
 }				t_map;
 
 typedef struct	s_algo 
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		e2;
+	int		x1;
+	int		x2;
+	int		y1;
+	int		y2;
 	float	temp_column;
 	float	temp_line;
 }				t_algo;
@@ -83,16 +90,17 @@ void	ft_init_value(t_algo *algo);
 void	ft_malloc_1(t_map *map, int line);
 void	ft_draw_line(t_map *map, t_algo *algo, int line, int column);
 void	ft_draw_column(t_map *map, t_algo *algo);
+void	ft_height_2(t_map *map, int	line, int column, float SIN30);
 
 //--------------------------------------------------------------
 
-int	close_window(t_map *map);
-int	escape_key(int keycode, t_map *map);
-int	ft_size_map(char *file);
-int	ft_count_line(char **line);
-int	ft_count_column(char ***map);
-int	key_hook(int key, t_map *map);
-int	mouse_scroll(int scroll, int x, int y, t_map *map);
+int		close_window(t_map *map);
+int		escape_key(int keycode, t_map *map);
+int		ft_size_map(char *file);
+int		ft_count_line(char **line);
+int		ft_count_column(char ***map);
+int		key_hook(int key, t_map *map);
+int		mouse_scroll(int scroll, int x, int y, t_map *map);
 
 //--------------------------------------------------------------
 
