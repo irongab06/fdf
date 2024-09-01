@@ -9,7 +9,6 @@ int	ft_size_map(char *file)
 
 	size = 0;
 	fd = open(file, O_RDONLY);
-	read_open = read(fd, buffer, 1);
 	if (fd < 0)
 		return (0);
 	read_open = read(fd, buffer, 1);
@@ -18,10 +17,8 @@ int	ft_size_map(char *file)
 		size++;
 		read_open = read(fd, buffer, 1);
 	}
-	printf("read_open %i\n", size);
 	if (read_open < 0)
 	{
-		ft_putstr_fd("ERROR NO MAP !!!!!!\n", 0);
 		close(fd);
 		exit (1);
 	}

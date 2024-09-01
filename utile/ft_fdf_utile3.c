@@ -7,8 +7,8 @@ void	ft_center_map(int x, int y, t_map *map)
 	int		x_iso;
 	int		y_iso;
 
-	cos30 = cos(M_PI / 8);
-	sin30 = sin(M_PI / 8);
+	cos30 = cos(PI / 8);
+	sin30 = sin(PI / 8);
 	x_iso = x / 2;
 	y_iso = y / 2;
 	map->x_iso = (x_iso + y_iso) * cos30 * map->scale;
@@ -24,7 +24,7 @@ void	ft_height(t_map *map)
 	float	sin30;
 
 	map->divider = 1;
-	sin30 = sin(M_PI / 8);
+	sin30 = sin(PI / 8);
 	line = 0;
 	while (line < map->line_count)
 	{

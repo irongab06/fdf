@@ -12,11 +12,11 @@ void	proj_iso(int x, int y, t_map *map, int z)
 	sin_angle = sin(map->rotate);
 	map->x_rot = x * cos_angle - y * sin_angle;
 	map->y_rot = x * sin_angle + y * cos_angle;
-	map->COS = cos(M_PI / 6);
-	map->SIN = sin(M_PI / map->new_projection);
-	add_x = (map->x_rot + map->y_rot) * map->COS;
+	map->cos = cos(PI / 6);
+	map->sin = sin(PI / map->new_projection);
+	add_x = (map->x_rot + map->y_rot) * map->cos;
 	map->x_iso = add_x * map->scale + map->offset_x;
-	add_y = (map->x_rot - map->y_rot) * map->SIN;
+	add_y = (map->x_rot - map->y_rot) * map->sin;
 	map->y_iso = (add_y - (z / map->divider)) * map->scale + map->offset_y;
 }
 

@@ -10,14 +10,15 @@
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 
-# define M_PI 3.14159265358979323846
+# define PI 3.14159265358979323846
 
-typedef struct	s_map
+typedef struct s_map
 {
 	void	*img;
 	void	*mlx;
 	void	*win;
-	float	rotate;
+
+	int		size;
 	int		line_count;
 	int		column_count;
 	int		width;
@@ -32,6 +33,8 @@ typedef struct	s_map
 	int		color;
 	int		z_max;
 	int		index_color;
+
+	float	rotate;
 	float	divider;
 	float	x_iso;
 	float	y_iso;
@@ -40,13 +43,14 @@ typedef struct	s_map
 	float	offset_y;
 	float	x_rot;
 	float	y_rot;
-	float	COS;
-	float	SIN;
+	float	cos;
+	float	sin;
+
 	char	***map;
 	char	*addr;
 }				t_map;
 
-typedef struct	s_algo 
+typedef struct s_algo
 {
 	int		dx;
 	int		dy;
@@ -58,6 +62,7 @@ typedef struct	s_algo
 	int		x2;
 	int		y1;
 	int		y2;
+
 	float	temp_column;
 	float	temp_line;
 }				t_algo;
@@ -90,7 +95,8 @@ void	ft_init_value(t_algo *algo);
 void	ft_malloc_1(t_map *map, int line);
 void	ft_draw_line(t_map *map, t_algo *algo, int line, int column);
 void	ft_draw_column(t_map *map, t_algo *algo);
-void	ft_height_2(t_map *map, int	line, int column, float SIN30);
+void	ft_height_2(t_map *map, int line, int column, float SIN30);
+void	ft_split_colomn(char **line, t_map *map);
 
 //--------------------------------------------------------------
 
@@ -107,7 +113,5 @@ int		mouse_scroll(int scroll, int x, int y, t_map *map);
 char	*ft_malloc(int size);
 
 //--------------------------------------------------------------
-
-void	ft_split_colomn(char **line, t_map *map);
 
 #endif

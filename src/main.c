@@ -6,6 +6,9 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		map.size = ft_size_map(argv[1]);
+		if (map.size == 0)
+			return (0);
 		map.mlx = mlx_init();
 		mlx_get_screen_size(map.mlx, &map.width, &map.height);
 		map.win = mlx_new_window(map.mlx, map.width, map.height, "fdf!!!!");
