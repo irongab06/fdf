@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 				&map.line_length, &map.endian);
 		ft_init_map(argv[1], &map);
 		mlx_put_image_to_window(map.mlx, map.win, map.img, 0, 0);
+		mlx_key_hook(map.win, key_hook, &map);
+		mlx_hook(map.win, 4, 4, mouse_scroll, &map);
 		mlx_hook(map.win, 2, 1L << 0, escape_key, &map);
 		mlx_hook(map.win, 33, 0L, close_window, &map);
 		mlx_loop(map.mlx);

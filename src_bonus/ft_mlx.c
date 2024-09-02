@@ -34,3 +34,29 @@ int	escape_key(int keycode, t_map *map)
 	}
 	return (0);
 }
+
+int	key_hook(int keycode, t_map *map)
+{
+	ft_movement(keycode, map);
+	ft_up_down(keycode, map);
+	ft_rotate(keycode, map);
+	ft_projection(keycode, map);
+	ft_color(keycode, map);
+	if (keycode == 0xff0d)
+		draw_map(map, 0);
+	ft_reset_map(map);
+	return (0);
+}
+
+int	mouse_scroll(int scroll, int x, int y, t_map *map)
+{
+	(void)x;
+	(void)y;
+	(void)map;
+	if (scroll == 4)
+		map->scale += 0.50f;
+	if (scroll == 5 && map->scale >= 2.00f)
+		map->scale -= 0.50f;
+	ft_reset_map(map);
+	return (0);
+}
